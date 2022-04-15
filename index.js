@@ -7,7 +7,7 @@ const computerPlay = () => {
     return CHOICES[randomNumber];
 }
 
-// To check if player won
+// Checks if player won based on RULES
 const hasPlayerWon = (playerSelection, computerSelection) => {
     for(const rule of RULES) {
         if(rule[0] === playerSelection && rule[1] === computerSelection) {
@@ -17,10 +17,10 @@ const hasPlayerWon = (playerSelection, computerSelection) => {
     return false;
 }
 
-// To clean player selection
+// Cleans player selection
 const clean = (playerSelection) => (playerSelection.trim().toLowerCase());
 
-// To play a single round
+// Plays a single round
 const playRound = (playerSelection, computerSelection) => {
     playerSelection = clean(playerSelection);
     if(!CHOICES.includes(playerSelection)) {
@@ -35,7 +35,7 @@ const playRound = (playerSelection, computerSelection) => {
     return `You lose, ${computerSelection} beats ${playerSelection}`;
 }
 
-// To play 5 rounds
+// Plays 5 rounds
 const game = () => {
     let playerSelection;
     for(let i = 0; i < 5; i++) {
