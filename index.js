@@ -17,6 +17,9 @@ const hasPlayerWon = (playerSelection, computerSelection) => {
     return false;
 }
 
+// Check if it's a draw
+const isDraw = (playerSelection, computerSelection) => (playerSelection === computerSelection);
+
 // Cleans player selection
 const clean = (playerSelection) => (playerSelection.trim().toLowerCase());
 
@@ -26,7 +29,7 @@ const playRound = (playerSelection, computerSelection) => {
     if(!CHOICES.includes(playerSelection)) {
         return "Invalid choice";
     }
-    if(playerSelection == computerSelection) {
+    if(isDraw(playerSelection, computerSelection)) {
         return `It's a draw, you both picked ${playerSelection}`;
     }
     if(hasPlayerWon(playerSelection, computerSelection)) {
@@ -35,36 +38,40 @@ const playRound = (playerSelection, computerSelection) => {
     return `You lose, ${computerSelection} beats ${playerSelection}`;
 }
 
-// Get buttons
+// Get DOM elements
 const rockButton = document.querySelector(".rock-button");
 const paperButton = document.querySelector(".paper-button");
 const scissorsButton = document.querySelector(".scissors-button");
+const resultDiv = document.querySelector(".result");
+resultDiv.setAttribute("style", "white-space: pre");
 
 // Just console logs the player and computer picks
-const displayPlayersPicks = (playerSelection, computerSelection) => {
-    console.log(`You: ${clean(playerSelection)}`);
-    console.log(`Computer: ${computerSelection}`);
+const getPlayersPicks = (playerSelection, computerSelection) => {
+    let playerPicks = "";
+    playerPicks += `You: ${clean(playerSelection)}\r\n`;
+    playerPicks += `Computer: ${computerSelection}\r\n`;
+    return playerPicks;
 }
 
 const handleRockClick = () => {
     computerSelection = computerPlay();
-    displayPlayersPicks("rock", computerSelection);
-    console.log(playRound("rock", computerSelection));
-    console.log("------------------------------------------");
+    resultDiv.textContent = "";
+    resultDiv.textContent += getPlayersPicks("rock", computerSelection);
+    resultDiv.textContent += playRound("rock", computerSelection);
 }
 
 const handlePaperClick = () => {
     computerSelection = computerPlay();
-    displayPlayersPicks("paper", computerSelection);
-    console.log(playRound("paper", computerSelection));
-    console.log("------------------------------------------");
+    resultDiv.textContent = "";
+    resultDiv.textContent += getPlayersPicks("paper", computerSelection);
+    resultDiv.textContent += playRound("paper", computerSelection);
 }
 
 const handleScissorsClick = () => {
     computerSelection = computerPlay();
-    displayPlayersPicks("scissors", computerSelection);
-    console.log(playRound("scissors", computerSelection));
-    console.log("------------------------------------------");
+    resultDiv.textContent = "";
+    resultDiv.textContent += getPlayersPicks("scissors", computerSelection);
+    resultDiv.textContent += playRound("scissors", computerSelection);
 }
 
 // Add event listeners
