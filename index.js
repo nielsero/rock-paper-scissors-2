@@ -40,6 +40,34 @@ const rockButton = document.querySelector(".rock-button");
 const paperButton = document.querySelector(".paper-button");
 const scissorsButton = document.querySelector(".scissors-button");
 
-console.log(rockButton);
-console.log(paperButton);
-console.log(scissorsButton);
+// Just console logs the player and computer picks
+const displayPlayersPicks = (playerSelection, computerSelection) => {
+    console.log(`You: ${clean(playerSelection)}`);
+    console.log(`Computer: ${computerSelection}`);
+}
+
+const handleRockClick = () => {
+    computerSelection = computerPlay();
+    displayPlayersPicks("rock", computerSelection);
+    console.log(playRound("rock", computerSelection));
+    console.log("------------------------------------------");
+}
+
+const handlePaperClick = () => {
+    computerSelection = computerPlay();
+    displayPlayersPicks("paper", computerSelection);
+    console.log(playRound("paper", computerSelection));
+    console.log("------------------------------------------");
+}
+
+const handleScissorsClick = () => {
+    computerSelection = computerPlay();
+    displayPlayersPicks("scissors", computerSelection);
+    console.log(playRound("scissors", computerSelection));
+    console.log("------------------------------------------");
+}
+
+// Add event listeners
+rockButton.addEventListener("click", handleRockClick);
+paperButton.addEventListener("click", handlePaperClick);
+scissorsButton.addEventListener("click", handleScissorsClick);
