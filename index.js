@@ -35,17 +35,11 @@ const playRound = (playerSelection, computerSelection) => {
     return `You lose, ${computerSelection} beats ${playerSelection}`;
 }
 
-// Plays 5 rounds
-const game = () => {
-    let playerSelection;
-    for(let i = 0; i < 5; i++) {
-        playerSelection = prompt("Rock, Paper or Scissors?");
-        computerSelection = computerPlay();
-        console.log(`You: ${clean(playerSelection)}`);
-        console.log(`Computer: ${computerSelection}`);
-        console.log(playRound(playerSelection, computerSelection));
-        console.log("------------------------------------------");
-    }
-}
+// Get buttons
+const rockButton = document.querySelector(".rock-button");
+const paperButton = document.querySelector(".paper-button");
+const scissorsButton = document.querySelector(".scissors-button");
 
-game();
+console.log(rockButton);
+console.log(paperButton);
+console.log(scissorsButton);
