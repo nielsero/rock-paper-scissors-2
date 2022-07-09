@@ -38,43 +38,202 @@ const playRound = (playerSelection, computerSelection) => {
     return `You lose, ${computerSelection} beats ${playerSelection}`;
 }
 
-// Get DOM elements
+// RPS - UI
+
+// Getting DOM elements
+const roundCounter = document.querySelector(".round-counter");
+const playerScoreCounter = document.querySelector(".player-score-counter");
+const computerScoreCounter = document.querySelector(".computer-score-counter");
+const playerMove = document.querySelector(".player-move");
+const computerMove = document.querySelector(".computer-move");
+const results = document.querySelector(".results");
 const rockButton = document.querySelector(".rock-button");
 const paperButton = document.querySelector(".paper-button");
 const scissorsButton = document.querySelector(".scissors-button");
-const resultDiv = document.querySelector(".result");
-resultDiv.setAttribute("style", "white-space: pre");
+const restartButton = document.querySelector(".restart-button");
 
-// Just console logs the player and computer picks
-const getPlayersPicks = (playerSelection, computerSelection) => {
-    let playerPicks = "";
-    playerPicks += `You: ${clean(playerSelection)}\r\n`;
-    playerPicks += `Computer: ${computerSelection}\r\n`;
-    return playerPicks;
+// Initial variables
+let computerSelection;
+let gameOver = false;
+let round = 1;
+let playerScore = 0;
+let computerScore = 0;
+
+// Initial setup
+roundCounter.textContent = round.toString();
+playerScoreCounter.textContent = playerScore.toString();
+computerScoreCounter.textContent = computerScore.toString();
+
+// Methods for updating rounds, scores and result
+const updateRound = (round) => {
+    roundCounter.textContent = round.toString();
 }
 
-const handleRockClick = () => {
-    computerSelection = computerPlay();
-    resultDiv.textContent = "";
-    resultDiv.textContent += getPlayersPicks("rock", computerSelection);
-    resultDiv.textContent += playRound("rock", computerSelection);
+const updatePlayerScore = (score) => {
+    playerScoreCounter.textContent = score.toString();
+}
+
+const updateComputerScore = (score) => {
+    computerScoreCounter.textContent = score.toString();
+}
+
+const updateResults = (result) => {
+    results.textContent = result;
+}
+
+// Update the computer move with computer latest move
+const updateComputerMove = (move) => {
+    // Removes all classes
+    computerMove.classList.remove("rock");
+    computerMove.classList.remove("paper");
+    computerMove.classList.remove("scissors");
+
+    // Adds correct class
+    if(move == "rock") {
+        computerMove.classList.add("rock");
+        return;
+    }
+    if(move == "paper") {
+        computerMove.classList.add("paper");
+        return;
+    }
+    computerMove.classList.add("scissors");
+}
+
+// Update player move
+const updatePlayerMove = (move) => {
+    // Removes all classes
+    playerMove.classList.remove("rock");
+    playerMove.classList.remove("paper");
+    playerMove.classList.remove("scissors");
+
+    // Adds correct class
+    if(move == "rock") {
+        playerMove.classList.add("rock");
+        return;
+    }
+    if(move == "paper") {
+        playerMove.classList.add("paper");
+        return;
+    }
+    playerMove.classList.add("scissors");
+}
+
+// Event listeners
+const handleRockClick = (event) => {
+    const move = "rock";
+    if(!gameOver) {
+        updateRound(round);
+        computerSelection = computerPlay();
+        updatePlayerMove(move);
+        updateComputerMove(computerSelection);
+
+        result = playRound(move, computerSelection);
+        updateResults(result);
+
+        if(hasPlayerWon(move, computerSelection)) {
+            playerScore++;
+        } else if(!isDraw(move, computerSelection)) {
+            // if it's not a draw, it means computer won
+            computerScore++;
+        }
+        updatePlayerScore(playerScore);
+        updateComputerScore(computerScore);
+        round++;
+
+        if(playerScore === 5) {
+            gameOver = true;
+            updateResults("Player won!")
+        }
+
+        if(computerScore === 5) {
+            gameOver = true;
+            updateResults("Computer won!");
+        }
+    }
 }
 
 const handlePaperClick = () => {
-    computerSelection = computerPlay();
-    resultDiv.textContent = "";
-    resultDiv.textContent += getPlayersPicks("paper", computerSelection);
-    resultDiv.textContent += playRound("paper", computerSelection);
+    const move = "paper";
+    if(!gameOver) {
+        updateRound(round);
+        computerSelection = computerPlay();
+        updatePlayerMove(move);
+        updateComputerMove(computerSelection);
+
+        result = playRound(move, computerSelection);
+        updateResults(result);
+
+        if(hasPlayerWon(move, computerSelection)) {
+            playerScore++;
+        } else if(!isDraw(move, computerSelection)) {
+            // if it's not a draw, it means computer won
+            computerScore++;
+        }
+        updatePlayerScore(playerScore);
+        updateComputerScore(computerScore);
+        round++;
+
+        if(playerScore === 5) {
+            gameOver = true;
+            updateResults("Player won!")
+        }
+
+        if(computerScore === 5) {
+            gameOver = true;
+            updateResults("Computer won!");
+        }
+    }
 }
 
 const handleScissorsClick = () => {
-    computerSelection = computerPlay();
-    resultDiv.textContent = "";
-    resultDiv.textContent += getPlayersPicks("scissors", computerSelection);
-    resultDiv.textContent += playRound("scissors", computerSelection);
+    const move = "scissors";
+    if(!gameOver) {
+        updateRound(round);
+        computerSelection = computerPlay();
+        updatePlayerMove(move);
+        updateComputerMove(computerSelection);
+
+        result = playRound(move, computerSelection);
+        updateResults(result);
+
+        if(hasPlayerWon(move, computerSelection)) {
+            playerScore++;
+        } else if(!isDraw(move, computerSelection)) {
+            // if it's not a draw, it means computer won
+            computerScore++;
+        }
+        updatePlayerScore(playerScore);
+        updateComputerScore(computerScore);
+        round++;
+
+        if(playerScore === 5) {
+            gameOver = true;
+            updateResults("Player won!")
+        }
+
+        if(computerScore === 5) {
+            gameOver = true;
+            updateResults("Computer won!");
+        }
+    }
+}
+
+const handleRestartClick = () => {
+    gameOver = false;
+    round = 1;
+    playerScore = 0;
+    computerScore = 0;
+
+    // Initial setup
+    roundCounter.textContent = round.toString();
+    playerScoreCounter.textContent = playerScore.toString();
+    computerScoreCounter.textContent = computerScore.toString();
+    results.textContent = "";
 }
 
 // Add event listeners
 rockButton.addEventListener("click", handleRockClick);
 paperButton.addEventListener("click", handlePaperClick);
 scissorsButton.addEventListener("click", handleScissorsClick);
+restartButton.addEventListener("click", handleRestartClick);

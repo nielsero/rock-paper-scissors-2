@@ -1,0 +1,43 @@
+.move {
+    width: 200px;
+    height: 200px;
+    background: lightgray;
+}
+
+.rock {
+    background-image: url(images/rock2.png);
+    background-size: cover;
+}
+
+.paper {
+    background-image: url(images/paper2.png);
+    background-size: cover;
+}
+
+.scissors {
+    background-image: url(images/scissors2.png);
+    background-size: cover;
+}
+
+.pick-button {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    border: none;
+}
+
+.results {
+    height: 20px;
+}
+
+.rock-button {
+    background-image: url(images/rock.png);
+}
+
+.paper-button {
+    background-image: url(images/paper.png);
+}
+
+.scissors-button {
+    background-image: url(images/scissors.png);
+}
