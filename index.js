@@ -63,6 +63,7 @@ let computerScore = 0;
 roundCounter.textContent = round.toString();
 playerScoreCounter.textContent = playerScore.toString();
 computerScoreCounter.textContent = computerScore.toString();
+results.textContent = "Pick a move below";
 
 // Methods for updating rounds, scores and result
 const updateRound = (round) => {
@@ -119,6 +120,20 @@ const updatePlayerMove = (move) => {
     playerMove.classList.add("scissors");
 }
 
+// Disable (appears) the buttons 
+const disableButtons = () => {
+    rockButton.classList.add("disabled");
+    paperButton.classList.add("disabled");
+    scissorsButton.classList.add("disabled");
+}
+
+// Enable buttons
+const enableButtons = () => {
+    rockButton.classList.remove("disabled");
+    paperButton.classList.remove("disabled");
+    scissorsButton.classList.remove("disabled");
+}
+
 // Event listeners
 const handleRockClick = (event) => {
     const move = "rock";
@@ -143,12 +158,14 @@ const handleRockClick = (event) => {
 
         if(playerScore === 5) {
             gameOver = true;
-            updateResults("Player won!")
+            updateResults("Player won!");
+            disableButtons();
         }
 
         if(computerScore === 5) {
             gameOver = true;
             updateResults("Computer won!");
+            disableButtons();
         }
     }
 }
@@ -176,12 +193,14 @@ const handlePaperClick = () => {
 
         if(playerScore === 5) {
             gameOver = true;
-            updateResults("Player won!")
+            updateResults("Player won!");
+            disableButtons();
         }
 
         if(computerScore === 5) {
             gameOver = true;
             updateResults("Computer won!");
+            disableButtons();
         }
     }
 }
@@ -209,12 +228,14 @@ const handleScissorsClick = () => {
 
         if(playerScore === 5) {
             gameOver = true;
-            updateResults("Player won!")
+            updateResults("Player won!");
+            disableButtons();
         }
 
         if(computerScore === 5) {
             gameOver = true;
             updateResults("Computer won!");
+            disableButtons();
         }
     }
 }
@@ -230,6 +251,8 @@ const handleRestartClick = () => {
     playerScoreCounter.textContent = playerScore.toString();
     computerScoreCounter.textContent = computerScore.toString();
     results.textContent = "";
+
+    enableButtons();
 }
 
 // Add event listeners

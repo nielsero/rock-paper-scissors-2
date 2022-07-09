@@ -10,14 +10,14 @@
 </head>
 <body>
     <main class="container">
-        <h1>Rock Paper Scissors</h1>
-        <p>Round <span class="round-counter"></span></p>
+        <h1 class="title">Rock Paper Scissors</h1>
+        <p class="round">Round <span class="round-counter"></span></p>
         <div class="show-moves">
-            <div>
+            <div class="player-container">
                 <p>Player: <span class="player-score-counter"></span></p>
                 <div class="player-move move"></div>
             </div>
-            <div>
+            <div class="computer-container">
                 <p>Computer: <span class="computer-score-counter"></span></p>
                 <div class="computer-move move"></div>
             </div>
@@ -29,6 +29,12 @@
             <button class="scissors-button pick-button"></button>
         </div>
         <button class="restart-button">Restart</button>
+        <footer>
+            <span>Made by nielsero</span>
+            <a class="github-link" href="https://www.github.com/nielsero" target="_blank">
+                <img src="images/github.png"  alt="github link"/>
+            </a>
+        </footer>
     </main>
 
 </body>
