@@ -135,15 +135,15 @@ const enableButtons = () => {
 }
 
 // Event listeners
-const handleRockClick = (event) => {
-    const move = "rock";
+const handleMove = (move) => {
+    // To handle any move (to not repeat the same instructions for every move)
     if(!gameOver) {
         updateRound(round);
         computerSelection = computerPlay();
         updatePlayerMove(move);
         updateComputerMove(computerSelection);
 
-        result = playRound(move, computerSelection);
+        const result = playRound(move, computerSelection);
         updateResults(result);
 
         if(hasPlayerWon(move, computerSelection)) {
@@ -170,74 +170,16 @@ const handleRockClick = (event) => {
     }
 }
 
-const handlePaperClick = () => {
-    const move = "paper";
-    if(!gameOver) {
-        updateRound(round);
-        computerSelection = computerPlay();
-        updatePlayerMove(move);
-        updateComputerMove(computerSelection);
+const handleRockClick = (event) => {
+    handleMove("rock");
+}
 
-        result = playRound(move, computerSelection);
-        updateResults(result);
-
-        if(hasPlayerWon(move, computerSelection)) {
-            playerScore++;
-        } else if(!isDraw(move, computerSelection)) {
-            // if it's not a draw, it means computer won
-            computerScore++;
-        }
-        updatePlayerScore(playerScore);
-        updateComputerScore(computerScore);
-        round++;
-
-        if(playerScore === 5) {
-            gameOver = true;
-            updateResults("Player won!");
-            disableButtons();
-        }
-
-        if(computerScore === 5) {
-            gameOver = true;
-            updateResults("Computer won!");
-            disableButtons();
-        }
-    }
+const handlePaperClick = (event) => {
+    handleMove("paper");
 }
 
 const handleScissorsClick = () => {
-    const move = "scissors";
-    if(!gameOver) {
-        updateRound(round);
-        computerSelection = computerPlay();
-        updatePlayerMove(move);
-        updateComputerMove(computerSelection);
-
-        result = playRound(move, computerSelection);
-        updateResults(result);
-
-        if(hasPlayerWon(move, computerSelection)) {
-            playerScore++;
-        } else if(!isDraw(move, computerSelection)) {
-            // if it's not a draw, it means computer won
-            computerScore++;
-        }
-        updatePlayerScore(playerScore);
-        updateComputerScore(computerScore);
-        round++;
-
-        if(playerScore === 5) {
-            gameOver = true;
-            updateResults("Player won!");
-            disableButtons();
-        }
-
-        if(computerScore === 5) {
-            gameOver = true;
-            updateResults("Computer won!");
-            disableButtons();
-        }
-    }
+    handleMove("scissors");
 }
 
 const handleRestartClick = () => {
@@ -251,7 +193,6 @@ const handleRestartClick = () => {
     playerScoreCounter.textContent = playerScore.toString();
     computerScoreCounter.textContent = computerScore.toString();
     results.textContent = "";
-
     enableButtons();
 }
 
